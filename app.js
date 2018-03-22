@@ -15,17 +15,18 @@ app.use(bodyParser.json());
 app.post("/github-keys", async (req, res) => {
   // users array is either non-existent or empty
   // send error and return
-  if (!req.body.users || !req.body.users.length) {
+  if (!req.body.usernames || !req.body.usernames.length) {
     return res.status(400).json({
-      err: "Body must contain a non-empty array of Github usernames."
+      error:
+        "Body must contain a non-empty array of Github usernames called 'usernames'"
     });
   }
-  const { users } = req.body;
+  const { usernames } = req.body;
   const results = {};
 
   // get Github data for each user and save to results object
   await Promise.all(
-    users.map(async user => {
+    usernames.map(async user => {
       // check if username array has duplicates
       if (results[user]) {
         return user;
@@ -50,8 +51,8 @@ app.post("/github-keys", async (req, res) => {
 });
 
 // start server on port
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}...`);
 });
 
-module.exports = app;
+module.exports = server;
