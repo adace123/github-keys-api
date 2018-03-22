@@ -13,3 +13,6 @@ If you plan on making a lot of requests with this API, be sure to get an OAuth t
 
     # Serve on localhost:8000
     npm start
+    
+    # Use a REST client such as Postman to send a POST request to /github-keys with array of usernames in the request body.
+    # e.g. { usernames: ["John Smith", "Jane Doe"] }
