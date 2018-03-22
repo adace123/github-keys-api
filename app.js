@@ -50,6 +50,10 @@ app.post("/github-keys", async (req, res) => {
   return res.status(200).json(results);
 });
 
+app.use((req, res, next) => {
+  res.status(404).send({ error: "Route does not exist" });
+});
+
 // start server on port
 const server = app.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}...`);
